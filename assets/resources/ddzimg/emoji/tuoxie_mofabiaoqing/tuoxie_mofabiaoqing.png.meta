@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "8aab71d5-d957-4bfe-9b1e-f6d947a3adf3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "tuoxie_mofabiaoqing": {
+      "ver": "1.0.3",
+      "uuid": "6c71d75e-5d17-4e32-b4cf-435945f970e5",
+      "rawTextureUuid": "8aab71d5-d957-4bfe-9b1e-f6d947a3adf3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -185.5,
+      "offsetY": 16,
+      "trimX": 3,
+      "trimY": 7,
+      "width": 647,
+      "height": 466,
+      "rawWidth": 1024,
+      "rawHeight": 512,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
