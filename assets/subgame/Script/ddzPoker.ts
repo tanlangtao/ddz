@@ -26,19 +26,20 @@ export default class Helloworld extends cc.Component {
     onLoad(){
     }
     public cardInit(value :Number,type:Number){
+        
         this.value = value;
         this.type = type;
-        if(this.type == 4){
-            this.loadImages(`ddzimg/ddzpoker/card_${this.type}_${this.value}`,this.card.node);
+        if(type == 4){
+            this.loadImages(`ddzimg/ddzpoker/card_${type}_${value}`,this.card.node);
             this.bigT.node.active = false;
         }else{  
-            this.loadImages(`ddzimg/ddzpoker/poker_${Number(this.type)%2}_${this.value}`,this.v.node);
-            this.loadImages(`ddzimg/ddzpoker/t_${this.type}`,this.smallT.node);
+            this.loadImages(`ddzimg/ddzpoker/poker_${Number(type)%2}_${value}`,this.v.node);
+            this.loadImages(`ddzimg/ddzpoker/t_${type}`,this.smallT.node);
             if(this.value>10 ){
-                this.loadImages(`ddzimg/ddzpoker/card_${this.type}_${this.value}`,this.card.node);
+                this.loadImages(`ddzimg/ddzpoker/card_${type}_${value}`,this.card.node);
                 this.bigT.node.active = false;
             }else{
-                this.loadImages(`ddzimg/ddzpoker/t_${this.type}`,this.bigT.node);
+                this.loadImages(`ddzimg/ddzpoker/t_${type}`,this.bigT.node);
                 this.card.node.active = false;
             }
         }
