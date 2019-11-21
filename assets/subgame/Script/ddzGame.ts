@@ -30,6 +30,7 @@ export default class NewClass extends cc.Component {
     onLoad(){
         this.addBtnHandler('LogicLayer/btn_fapai');
         this.addBtnHandler('LogicLayer/btn_xipai');
+        // this.addOnTouchStart('Canvas/LogicLayer/HandlePoker');
         this.InitPoker = cc.find("Canvas/LogicLayer/InitPoker");
         this.HandlePoker = cc.find("Canvas/LogicLayer/HandlePoker");
         this.upHandlePoker = cc.find("Canvas/LogicLayer/upHandlePoker");
@@ -39,7 +40,7 @@ export default class NewClass extends cc.Component {
         this.getHandlePos();
     }
     /**
-     * 初始化牌
+     * 初始化牌数组
      */
     arrInit(){
         for(var i = 0;i<4;i++){
@@ -50,8 +51,8 @@ export default class NewClass extends cc.Component {
                 })
             }
         }
-        this.arr.push({ value:14, type:4 })
-        this.arr.push({ value:15, type:4 })
+        this.arr.push({ value:21, type:4 })
+        this.arr.push({ value:22, type:4 })
         this.arr= (this.ruffler(this.arr))
     }
     getHandlePos(){
@@ -88,8 +89,8 @@ export default class NewClass extends cc.Component {
             this.arr = this.ruffler(this.arr)
             this.arr.forEach((item:porker)=>{
                 var node = cc.instantiate(this.porker);
-                this.InitPoker.addChild(node);
                 node.getComponent('ddzPoker').cardInit(item.value,item.type);
+                this.InitPoker.addChild(node);
             })
         }
         else if(btnName == 'btn_fapai'){
@@ -103,30 +104,32 @@ export default class NewClass extends cc.Component {
         if(this.InitPoker.children.length==0) return;
         var index= 53;
         //发牌动画
-        let pokerAction = (item,num,handNode,cover)=>{
-            var action = cc.moveTo(0.1,this.handlePosArr[num]);
+        let pokerAction = (item:cc.Node,num:number,handNode:cc.Node,cover:boolean)=>{
+            var action = cc.moveTo(0,this.handlePosArr[num]);
             let call = cc.callFunc(()=>{
                 item.getChildByName('cover').active = cover;
                 this.InitPoker.removeChild(item);
                 handNode.addChild(item);
+                item.position = cc.v2(0,0)
                 index-=1;
-                fapai()
+                fapai();
             })
-            item.runAction(cc.sequence(action,call))
+            item.runAction(cc.sequence(action,call));
         }
         let fapai= ()=>{
             var item = this.InitPoker.children[index];
             if(index >36){
                 pokerAction(item,1,this.HandlePoker,false)
             }else if(index > 19){
-                pokerAction(item,2,this.downHandlePoker,false)
+                pokerAction(item,2,this.downHandlePoker,true)
             }else if(index>2){
-                pokerAction(item,0,this.upHandlePoker,false)
+                pokerAction(item,0,this.upHandlePoker,true)
             }else if(index >=0){
                 pokerAction(item,4,this.underPoker,true)
             }else{
                 //发牌结束
                 var newPoker = this.handleSort(this.HandlePoker.children)
+                console.log(newPoker)
                 this.HandlePoker.children.forEach((item,index)=>{
                     item.getComponent('ddzPoker').cardInit(newPoker[index].value,newPoker[index].type)
                 })
@@ -149,6 +152,7 @@ export default class NewClass extends cc.Component {
         var porkArr = []
         arr.forEach((item)=>{
             var poker = {
+                BrandValue:item.getComponent("ddzPoker").BrandValue,
                 value:item.getComponent("ddzPoker").value,
                 type:item.getComponent('ddzPoker').type,
             }
@@ -161,14 +165,29 @@ export default class NewClass extends cc.Component {
             var smallArr = [];
             var bigArr=[];
             for(let i = 0;i<array.length;i++){
-                if(array[i].value > pork0.value){
+                //比较牌型值 
+                if(array[i].BrandValue > pork0.BrandValue){
                     bigArr.push(array[i])
                 }else{
                     smallArr.push(array[i])
-                }0
+                }
             }
             return quickSort(bigArr).concat([pork0].concat(quickSort(smallArr)))
         }
         return quickSort(porkArr)
+        
+    }
+    public addOnTouchStart(str:string){
+        var node = cc.find(str);
+        let start_point :cc.Vec2 = null;
+        let end_point :cc.Vec2 = null;
+        node.on(cc.Node.EventType.TOUCH_START,(e:any)=>{
+            start_point  = e.touch._point;
+            console.log('滑动开始坐标:',start_point)
+        })
+        node.on(cc.Node.EventType.TOUCH_END,(e:any)=>{
+            end_point  = e.touch._point;
+            console.log('滑动结束坐标:',end_point)
+        })
     }
 }
