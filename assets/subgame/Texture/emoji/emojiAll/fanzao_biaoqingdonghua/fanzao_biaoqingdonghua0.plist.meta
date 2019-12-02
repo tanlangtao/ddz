@@ -9,7 +9,7 @@
   "type": "Texture Packer",
   "subMetas": {
     "fanzao0001.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "70f8fdec-587f-4e73-ac81-14dbd8d3c271",
       "rawTextureUuid": "70a6e67a-7e55-4b3b-8767-6d18beee4833",
       "trimType": "auto",
@@ -31,7 +31,7 @@
       "subMetas": {}
     },
     "fanzao0002.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "55b36688-c030-4d67-b0de-60c46cff850d",
       "rawTextureUuid": "70a6e67a-7e55-4b3b-8767-6d18beee4833",
       "trimType": "auto",

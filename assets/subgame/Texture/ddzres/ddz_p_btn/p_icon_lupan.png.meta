@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "c15967ce-c2aa-483c-9f49-2ac6cbd1194a",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "p_icon_lupan": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "67efb393-12f6-4bee-91a2-f634e57b5f69",
       "rawTextureUuid": "c15967ce-c2aa-483c-9f49-2ac6cbd1194a",
       "trimType": "auto",

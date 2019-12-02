@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "ff94f82f-4fd8-482a-8da7-cb575eb8cf5c",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "jiazai": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "48dc8066-84b4-4ff3-b094-443f2af616cd",
       "rawTextureUuid": "ff94f82f-4fd8-482a-8da7-cb575eb8cf5c",
       "trimType": "auto",

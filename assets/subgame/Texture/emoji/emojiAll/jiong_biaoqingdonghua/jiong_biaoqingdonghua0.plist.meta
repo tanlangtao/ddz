@@ -9,7 +9,7 @@
   "type": "Texture Packer",
   "subMetas": {
     "yanwujiong-yanwu0001.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "39fe131c-7f36-4bd8-899a-a6c2240cc2bc",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -31,7 +31,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0002.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "f8bfa979-4e17-48dd-8a47-1dea20ff2d7a",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -53,7 +53,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0003.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1c43ad01-e5a3-47c8-a374-0c57a3dbeff8",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -75,7 +75,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0004.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "2ab34d06-8af9-42d2-a7f6-8f17cd32ba9f",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -97,7 +97,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0005.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1a6d7bfe-f837-468f-b544-5a40169b72fe",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -119,7 +119,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0006.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "9d892cfa-bbb8-451a-b68c-b37370de3e78",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -141,7 +141,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0007.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "f5b14f73-3833-48c6-a744-c0f7ec462fd1",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -163,7 +163,7 @@
       "subMetas": {}
     },
     "yanwujiong-yanwu0008.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "44c1250b-566a-4a0c-8e1b-9a3e173b1ce5",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -185,7 +185,7 @@
       "subMetas": {}
     },
     "yanwujiong-zhengchang.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "85ae2df6-ea51-4639-9d97-6e3fb54ac7c1",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",
@@ -207,7 +207,7 @@
       "subMetas": {}
     },
     "yanwujiong-jiong.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "7e1287bd-0cb6-42d2-840a-0ec600db743b",
       "rawTextureUuid": "3547012c-1778-4454-b3d1-c81ee94a7d6f",
       "trimType": "auto",

@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "0eb586f3-2901-4178-9d4e-30fda3b3adb3",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "emoji": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "f8205df1-efd0-4576-9f03-68fd750191df",
       "rawTextureUuid": "0eb586f3-2901-4178-9d4e-30fda3b3adb3",
       "trimType": "auto",

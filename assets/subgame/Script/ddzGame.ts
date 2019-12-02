@@ -1,4 +1,6 @@
 import Utils from "./untils/ddzUtils";
+import {GameStatMgr} from "./ddzGameStatMgr";
+import {NoticeDef as NotiDef,NotificationCenter as NotiCenter, NoticeDef} from "./base/ddzNotification";
 const {ccclass, property} = cc._decorator;
 
 interface porker {
@@ -6,7 +8,8 @@ interface porker {
     type : number,
 }
 @ccclass
-export default class NewClass extends cc.Component {
+export default class ddzGame extends cc.Component {
+    readonly sClassName = "ddzGame";
 
     @property(cc.Prefab)
     porker:cc.Prefab = null;
@@ -20,6 +23,12 @@ export default class NewClass extends cc.Component {
     downHandlePoker:cc.Node = null;//下家手牌
 
     underPoker :cc.Node = null;//地主牌
+    
+    PlayHand : cc.Node = null;//出牌选择
+
+    DisPoker :cc.Node = null;//玩家出牌节点
+
+    DisType:cc.Node = null;//显示出牌牌型
 
     arr:porker[] = [];//54个数字
 
@@ -28,14 +37,21 @@ export default class NewClass extends cc.Component {
     handlePosArr:cc.Vec2[] = [];
 
     onLoad(){
+        GameStatMgr.gsMgr.ConnectServer();
+        NotiCenter.Regsiter(NotiDef.Test,this,this.onTest)
         this.addBtnHandler('LogicLayer/btn_fapai');
         this.addBtnHandler('LogicLayer/btn_xipai');
-        // this.addOnTouchStart('Canvas/LogicLayer/HandlePoker');
+        this.addBtnHandler('LogicLayer/PlayerPos1/PlayHand/ddz_btn_bc');
+        this.addBtnHandler('LogicLayer/PlayerPos1/PlayHand/ddz_btn_ts');
+        this.addBtnHandler('LogicLayer/PlayerPos1/PlayHand/ddz_btn_cp');
         this.InitPoker = cc.find("Canvas/LogicLayer/InitPoker");
-        this.HandlePoker = cc.find("Canvas/LogicLayer/HandlePoker");
-        this.upHandlePoker = cc.find("Canvas/LogicLayer/upHandlePoker");
-        this.downHandlePoker = cc.find("Canvas/LogicLayer/downHandlePoker");
+        this.upHandlePoker = cc.find("Canvas/LogicLayer/PlayerPos0/HandlePoker");
+        this.HandlePoker = cc.find("Canvas/LogicLayer/PlayerPos1/HandlePoker");
+        this.downHandlePoker = cc.find("Canvas/LogicLayer/PlayerPos2/HandlePoker");
         this.underPoker = cc.find("Canvas/LogicLayer/underPoker");
+        this.PlayHand = cc.find("Canvas/LogicLayer/PlayerPos1/PlayHand");
+        this.DisPoker = cc.find("Canvas/LogicLayer/PlayerPos1/DisPoker");
+        this.DisType = cc.find("Canvas/LogicLayer/PlayerPos1/DisType");
         this.arrInit();
         this.getHandlePos();
     }
@@ -60,11 +76,15 @@ export default class NewClass extends cc.Component {
         this.handlePosArr.push(this.HandlePoker.position)
         this.handlePosArr.push(this.downHandlePoker.position)
     }
+    onTest = (msg)=>{
+        console.log(msg)
+    }
     /**
      * 洗牌
      * @param arr 
      */
     private ruffler(arr){
+        GameStatMgr.gsMgr.sendTest('黎明')
         this.InitPoker.removeAllChildren();
         this.HandlePoker.removeAllChildren();
         this.upHandlePoker.removeAllChildren();
@@ -96,6 +116,29 @@ export default class NewClass extends cc.Component {
         else if(btnName == 'btn_fapai'){
             this.fapaiStart()
         }
+        else if(btnName == 'ddz_btn_bc'){
+            console.log('不要')
+        }
+        else if(btnName == 'ddz_btn_ts'){
+            console.log('提示')
+        }
+        //出牌
+        else if(btnName == 'ddz_btn_cp'){
+            let cardArr = this.HandlePoker.children
+            var cpArr = [];
+            for (var k in cardArr) {
+                var ddzPoker = cardArr[k].getComponent("ddzPoker")
+                if (ddzPoker.status === "STANDUP") {
+                    cpArr.push(cardArr[k])
+                }
+            }
+            this.discards(cpArr,this.HandlePoker,this.DisPoker);
+            this.PlayHand.active = false;
+            let self = this;
+            setTimeout(() => {
+                self.PlayHand.active = true;
+            }, 3000);
+        }
     }
     /**
      * 开始发牌
@@ -105,7 +148,7 @@ export default class NewClass extends cc.Component {
         var index= 53;
         //发牌动画
         let pokerAction = (item:cc.Node,num:number,handNode:cc.Node,cover:boolean)=>{
-            var action = cc.moveTo(0,this.handlePosArr[num]);
+            var action = cc.moveTo(0.1,this.handlePosArr[num]);
             let call = cc.callFunc(()=>{
                 item.getChildByName('cover').active = cover;
                 this.InitPoker.removeChild(item);
@@ -117,19 +160,19 @@ export default class NewClass extends cc.Component {
             item.runAction(cc.sequence(action,call));
         }
         let fapai= ()=>{
+            //逆时针顺序发牌
             var item = this.InitPoker.children[index];
-            if(index >36){
+            var itemD = this.InitPoker.children[index-1];
+            var itemU = this.InitPoker.children[index-2];
+            if((index+1)%3 == 0 && index>2){
                 pokerAction(item,1,this.HandlePoker,false)
-            }else if(index > 19){
-                pokerAction(item,2,this.downHandlePoker,true)
-            }else if(index>2){
-                pokerAction(item,0,this.upHandlePoker,true)
-            }else if(index >=0){
+                pokerAction(itemD,2,this.downHandlePoker,true)
+                pokerAction(itemU,0,this.upHandlePoker,true)
+            } else if(index<=2&&index>=0){
                 pokerAction(item,4,this.underPoker,true)
             }else{
-                //发牌结束
+                //排序
                 var newPoker = this.handleSort(this.HandlePoker.children)
-                console.log(newPoker)
                 this.HandlePoker.children.forEach((item,index)=>{
                     item.getComponent('ddzPoker').cardInit(newPoker[index].value,newPoker[index].type)
                 })
@@ -142,6 +185,30 @@ export default class NewClass extends cc.Component {
                     item.getComponent('ddzPoker').cardInit(newPoker3[index].value,newPoker3[index].type)
                 })
             }
+            //轮流发牌
+            // if(index >36){
+            //     pokerAction(item,1,this.HandlePoker,false)
+            // }else if(index > 19){
+            //     pokerAction(item,2,this.downHandlePoker,true)
+            // }else if(index>2){
+            //     pokerAction(item,0,this.upHandlePoker,true)
+            // }else if(index >=0){
+            //     pokerAction(item,4,this.underPoker,true)
+            // }else{
+            //     //发牌结束
+            //     var newPoker = this.handleSort(this.HandlePoker.children)
+            //     this.HandlePoker.children.forEach((item,index)=>{
+            //         item.getComponent('ddzPoker').cardInit(newPoker[index].value,newPoker[index].type)
+            //     })
+            //     var newPoker2 = this.handleSort(this.downHandlePoker.children)
+            //     this.downHandlePoker.children.forEach((item,index)=>{
+            //         item.getComponent('ddzPoker').cardInit(newPoker2[index].value,newPoker2[index].type)
+            //     })
+            //     var newPoker3 = this.handleSort(this.upHandlePoker.children)
+            //     this.upHandlePoker.children.forEach((item,index)=>{
+            //         item.getComponent('ddzPoker').cardInit(newPoker3[index].value,newPoker3[index].type)
+            //     })
+            // }
         }
         fapai()
     }
@@ -177,17 +244,48 @@ export default class NewClass extends cc.Component {
         return quickSort(porkArr)
         
     }
-    public addOnTouchStart(str:string){
-        var node = cc.find(str);
-        let start_point :cc.Vec2 = null;
-        let end_point :cc.Vec2 = null;
-        node.on(cc.Node.EventType.TOUCH_START,(e:any)=>{
-            start_point  = e.touch._point;
-            console.log('滑动开始坐标:',start_point)
-        })
-        node.on(cc.Node.EventType.TOUCH_END,(e:any)=>{
-            end_point  = e.touch._point;
-            console.log('滑动结束坐标:',end_point)
-        })
+     //出牌
+     discards(cards,handNode:cc.Node,disNode:cc.Node){
+        if(!cards || cards.length == 0 ) return
+
+        var cardsArr = []
+        disNode.removeAllChildren();
+        cards.forEach(item => {
+            cardsArr.push(item.getComponent("ddzPoker").BrandValue)
+        });
+        var cardtype = this.DisType.getComponent('ddzCardRule').init(cardsArr);
+        if(cardtype=='无效牌型'){
+            cards.forEach(item => {
+                var poker = item.getComponent('ddzPoker');
+                poker.isChiose = false;
+                poker.status = "SITDOWN";
+                item.y -= 19;
+            });
+            return
+        }else{
+            for (const key in cards){
+                var pos = cards[key].convertToWorldSpaceAR(cc.v2(0,0))
+                let endPos = disNode.convertToWorldSpaceAR(cc.v2(-56,-77.7))
+                var node = cc.instantiate(this.porker);
+                node.position = pos;
+                console.log(pos,endPos);
+                var poker = cards[key].getComponent('ddzPoker');
+                node.getComponent('ddzPoker').cardInit(poker.value,poker.type);
+                disNode.addChild(node);
+                // let callFun = cc.callFunc(()=>{
+                //     handNode.removeChild(cards[key]);
+                // })
+                // var action = cc.moveTo(1,endPos);
+                // var action2 = cc.sequence(action,callFun);
+                // node.runAction(action2);
+                // let callFun = cc.callFunc(()=>{
+                //     handNode.removeChild(cards[key]);
+                //     disNode.addChild(cards[key]);
+                // })
+                // var action = cc.moveTo(0,endPos);
+                // var action2 = cc.sequence(action,callFun);
+                // cards[key].runAction(action2)
+            }
+        }
     }
 }

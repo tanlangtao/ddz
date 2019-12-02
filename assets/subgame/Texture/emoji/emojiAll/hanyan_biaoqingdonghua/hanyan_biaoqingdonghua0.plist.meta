@@ -9,7 +9,7 @@
   "type": "Texture Packer",
   "subMetas": {
     "hanyanhanshui.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "e5c7733f-6cf3-4e03-992f-9de260ef321f",
       "rawTextureUuid": "44d22b65-0e65-40ad-8ea8-d94d3dbd1734",
       "trimType": "auto",
@@ -31,7 +31,7 @@
       "subMetas": {}
     },
     "hanyanlian.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "43a56be4-f6bd-4a74-ba30-000bf1595e23",
       "rawTextureUuid": "44d22b65-0e65-40ad-8ea8-d94d3dbd1734",
       "trimType": "auto",

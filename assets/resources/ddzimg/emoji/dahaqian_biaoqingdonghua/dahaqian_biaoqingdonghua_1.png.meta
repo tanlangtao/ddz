@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "3c6f5da1-223b-4bd1-9d28-eee208690aeb",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "dahaqian_biaoqingdonghua_1": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "c5c1b564-b1ba-43c2-932f-a6bd9f5e8359",
       "rawTextureUuid": "3c6f5da1-223b-4bd1-9d28-eee208690aeb",
       "trimType": "auto",

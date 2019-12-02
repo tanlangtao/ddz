@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "8d889946-510b-4fa8-9863-fac60f457ca5",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "damuzhi_biaoqingdonghua0": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "df70832f-f6a1-475b-b0c5-7622279dcfca",
       "rawTextureUuid": "8d889946-510b-4fa8-9863-fac60f457ca5",
       "trimType": "auto",

@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "0b2e5cec-77ef-4edf-a2f9-961a34ddacf5",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "jianjiaoji_mofabiaoqing0": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "9b55a6c2-8146-4fbb-ab49-456a06f679b1",
       "rawTextureUuid": "0b2e5cec-77ef-4edf-a2f9-961a34ddacf5",
       "trimType": "auto",
